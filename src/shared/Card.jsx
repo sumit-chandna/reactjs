@@ -12,9 +12,11 @@ function Card({ children, reverse }) {
 }
 
 Card.defaultProps = {
-    reverse: false
+    reverse: false,
 }
-Card.prototypes = {
-    reverse: PropTypes.bool
+
+Card.propTypes = {
+    children: PropTypes.node.isRequired,
+    reverse: PropTypes.bool,
 }
 export default Card
