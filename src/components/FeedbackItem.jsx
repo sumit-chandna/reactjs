@@ -1,23 +1,19 @@
 import React from 'react'
-import { useState } from 'react'
-
-function FeedbackItem() {
-    const [rating, setRating] = useState(7)
-    const [text, setText] = useState('This is example of a Feedback Item')
-    // const handleClick = () => {
-    //     setRating((prev) => {
-    //         return prev + 1
-    //     })
-    // }
+import Card from '../shared/Card'
+import PropTypes from 'prop-types'
+function FeedbackItem({ item }) {
     return (
-        <div className='card'>
-            <div className='num-display'>{rating}</div>
+        <Card>
+            <div className='num-display'>{item.rating}</div>
             <div className='text-display'>
-                {text}
+                {item.text}
             </div>
             {/* <button onClick={handleClick}>Click</button> */}
-        </div>
+        </Card>
     )
 }
 
+FeedbackItem.propTypes = {
+    item: PropTypes.object.isRequired,
+}
 export default FeedbackItem
