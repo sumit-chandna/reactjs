@@ -6,7 +6,7 @@ import FeedbackStats from './components/FeedbackStats';
 import FeedbackForm from './components/FeedbackForm';
 import { v4 as uuidv4 } from 'uuid'
 function App() {
-    const [feedback, setFeedback] = useState([feedbackData])
+    const [feedback, setFeedback] = useState(feedbackData)
     const deleteFeedback = (id) => {
         if (window.confirm('Are You Sure?')) {
             setFeedback(feedback.filter((item) => item.id !== id));
