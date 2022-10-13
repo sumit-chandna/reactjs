@@ -1,4 +1,5 @@
 import Header from "./components/Header";
+import FeedbackItem from "./components/FeedbackItem";
 function App() {
 
     return (
@@ -6,7 +7,7 @@ function App() {
             <Header />
             {/* <Header bgColor='red' textColor='blue'/> */}
             <div className="container">
-                <h1>My App</h1>
+                <FeedbackItem />
             </div>
         </>
     );
