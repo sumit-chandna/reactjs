@@ -1,19 +1,21 @@
-import React from 'react'
-import { useState } from 'react'
+import { createUserWithEmailAndPassword, getAuth, updateProfile } from 'firebase/auth'
+import { doc, serverTimestamp, setDoc } from 'firebase/firestore'
+import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify'
 import { ReactComponent as ArrowRightIcon } from '../assets/svg/keyboardArrowRightIcon.svg'
 import visibilityIcon from '../assets/svg/visibilityIcon.svg'
-import { getAuth, createUserWithEmailAndPassword, updateProfile } from 'firebase/auth'
 import { db } from '../firebase.config'
+
 
 function SignUp() {
   const [showPassword, setShowPassword] = useState(false)
-  const [fromData, setFormData] = useState({
+  const [formData, setFormData] = useState({
     name: '',
     email: '',
     password: ''
   })
-  const { name, email, password } = fromData;
+  const { name, email, password } = formData;
   const navigate = useNavigate()
   const onChange = (e) => {
     setFormData((prevState) => ({
@@ -30,9 +32,13 @@ function SignUp() {
       updateProfile(auth.currentUser, {
         displayName: name
       })
+      const formDataCopy = { ...formData }
+      delete formDataCopy.password;
+      formDataCopy.timestamp = serverTimestamp()
+      await setDoc(doc(db, 'users', user.uid), formDataCopy)
       navigate('/')
     } catch (error) {
-      console.log(error);
+      toast.error('Something went wrong!!')
     }
   }
   return (
